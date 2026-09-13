@@ -1,12 +1,117 @@
-@import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
 body {
-  font-family: 'Inter', sans-serif;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
 }
-.dark{
-  color-scheme: dark;
+
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
-html{
-  scroll-behavior: smooth;
+
+* {
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-26px); }
+}
+
+@keyframes background-blur {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float-slower 14s ease-in-out infinite;
+}
+
+.animate-background-blur {
+  animation: background-blur 16s ease-in-out infinite;
+}
+
+@keyframes forestFloat {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-16px) translateX(8px); }
+}
+
+@keyframes forestFloatDelayed {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-22px) translateX(-10px); }
+}
+
+@keyframes forestPulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+/* forest / floating background styles */
+.forest-blob {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.2s ease;
+  will-change: transform;
+  mix-blend-mode: screen;
+  opacity: 0.78; /* slightly reduced so UI text stands out */
+}
+
+.forest-blob.delayed {
+  transform-origin: center;
+  animation: blobDrift 18s ease-in-out infinite;
+  opacity: 0.68;
+}
+
+@keyframes blobDrift {
+  0% { transform: translateY(0) translateX(0) scale(1); }
+  50% { transform: translateY(-18px) translateX(10px) scale(1.01); }
+  100% { transform: translateY(0) translateX(0) scale(1); }
+}
+
+/* pointer-follow radial glow - keep subtle */
+.pointer-follow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(34,153,90,0.06) 0%, transparent 24%);
+  pointer-events: none;
+  z-index: -10;
+}
+
+html, body {
+  /* keep empty or set a neutral default */
+  background: transparent;
+  color: inherit;
 }
