@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const Background = () => {
+const Background = ({ darkMode = false }) => {
     const canvasRef = useRef(null);
     const mouseRef = useRef({ x: -9999, y: -9999, vx: 0, vy: 0, active: false });
 
@@ -67,7 +67,7 @@ const Background = () => {
 
         const update = () => {
             ctx.clearRect(0, 0, canvas.width / DPR, canvas.height / DPR);
-            ctx.fillStyle = `rgba(8,10,12,${config.bgAlpha})`;
+            ctx.fillStyle = `rgba(0,0,0,${config.bgAlpha})`;
             ctx.fillRect(0, 0, canvas.width / DPR, canvas.height / DPR);
 
             const m = mouseRef.current;
@@ -135,12 +135,12 @@ const Background = () => {
     }, []);
 
     return (
-        <div className="pointer-events-none fixed inset-0 z-0">
+        <div className={`pointer-events-none fixed inset-0 z-0 ${darkMode ? 'bg-black' : 'bg-transparent'}`}>
             <div className="absolute left-16 top-14 w-96 h-72 rounded-full bg-emerald-700/12 blur-3xl forest-blob" />
             <div className="absolute right-20 top-28 w-72 h-56 rounded-full bg-slate-800/10 blur-3xl forest-blob delayed" />
 
             {/* canvas for particles */}
-            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0" />
+            <canvas ref={canvasRef} className={`absolute inset-0 w-full h-full z-0 ${darkMode ? 'bg-black' : 'bg-transparent'}`} />
         </div>
     );
 };

@@ -92,13 +92,19 @@ const Home = ({ darkMode }) => {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative z-20 rounded-3xl shadow-xl overflow-hidden bg-transparent"
+          className="relative z-20 flex translate-y-4 items-center justify-center sm:translate-y-8"
         >
-          <div className="bg-transparent">
+          <div
+            className={`relative flex h-[280px] w-[280px] items-center justify-center overflow-hidden rounded-full border-[6px] p-2 shadow-2xl sm:h-[360px] sm:w-[360px] ${
+              darkMode
+                ? 'border-emerald-400/70 bg-slate-900/80'
+                : 'border-emerald-300 bg-white/90'
+            }`}
+          >
             <img
-              src="/me3.png"
+              src="/myself.jpg"
               alt="ALIF KHUSYAIRI"
-              className="w-full h-[580px] sm:h-[640px] object-contain object-top"
+              className="h-full w-full rounded-full object-cover object-top"
             />
           </div>
         </motion.div>
